@@ -26,13 +26,15 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫁</text></svg>">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 
 <style>
 /* ═══════════════════════════════════════════════════════════
-   권민재 — AI · Healthcare Data
+   권민재 — 포트폴리오 (계측 기술 문서)
+   ai.html · bio.html 은 이 <style> 블록을 바이트 단위로 공유한다. 한쪽만 고치지 말 것.
    ═══════════════════════════════════════════════════════════ */
 
 /* ─── Tokens ─── */
@@ -48,7 +50,7 @@
   --rule-2:      #b5c3c8;
 
   --trace:       #0c7687;
-  --trace-soft:  #dceff3;
+  --trace-soft:  #e3f3f7;
 
   --critical:    #c2372f;
   --warn:        #8f6305;
@@ -103,6 +105,8 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
 
 /* ═══ 언어 전환 ═══ */
+main:focus { outline: none; }
+
 html[lang="ko"] [data-lang="en"] { display: none !important; }
 html[lang="en"] [data-lang="ko"] { display: none !important; }
 .langswitch { display: inline-flex; flex: none; border: 1px solid var(--rule); border-radius: 999px; overflow: hidden; }
@@ -556,7 +560,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
 </head>
 <body>
 
-<a data-lang="ko" class="skip" href="#work">본문으로 건너뛰기</a><a data-lang="en" class="skip" href="#work">Skip to content</a>
+<a data-lang="ko" class="skip" href="#main">본문으로 건너뛰기</a><a data-lang="en" class="skip" href="#main">Skip to content</a>
 
 <div class="wrap">
 
@@ -584,6 +588,8 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
       </div>
     </div>
   </header>
+
+  <main id="main" tabindex="-1">
 
   <section class="readout" aria-label="주요 성과 요약">
     <div class="gauge">
@@ -841,7 +847,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
             <li data-lang="ko">앙상블의 OOF 민감도는 <em>0.9907</em>입니다. 특이도는 단일 모델보다 조금 낮지만 이 과제의 기준에 맞아 이쪽을 제출했습니다.</li><li data-lang="en">The ensemble reached <em>0.9907</em> sensitivity out of fold. Specificity is slightly lower than the single model, but it matched the criterion for this task, so that is what I submitted.</li>
           </ul>
 
-          <h4 data-lang="ko">결과</h4><h4 data-lang="en">Results</h4>
+          <h4 data-lang="ko">데이터 · 학습 곡선 · Grad-CAM</h4><h4 data-lang="en">Data, learning curves, Grad-CAM</h4>
           <p data-lang="ko" class="fig-hint">그림을 누르면 원본 크기로 열립니다</p><p data-lang="en" class="fig-hint">Select an image to open it full size</p>
           <div class="figs">
 
@@ -1016,7 +1022,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
              data-sub-en="Oz Coding School AI Healthcare · group 6 (team of four) · Jul 2026"
              data-repo="https://github.com/J36-Ai-Editer/Oz_codingSchool"
              data-repo-label="J36-Ai-Editer / Oz_codingSchool">
-          <h4 data-lang="ko">개요</h4><h4 data-lang="en">Overview</h4>
+          <h4 data-lang="ko">FastAPI 서빙과 Docker 배포 — 4인 팀</h4><h4 data-lang="en">FastAPI serving and Docker deployment — team of four</h4>
           <ul>
             <li data-lang="ko">학습한 인공지능 모델을 <strong>FastAPI REST API</strong>로 서빙하고 Docker로 컨테이너화해 배포한 4인 팀 프로젝트입니다.</li><li data-lang="en">This was a four-person project serving trained models through a <strong>FastAPI REST API</strong>, containerised with Docker.</li>
             <li data-lang="ko">환자 · 진료기록 · X-ray 이미지 · AI 분석 결과를 다루는 백엔드를 <strong>API · 서비스 · 리포지토리 계층으로 분리</strong>해 구성했습니다.</li><li data-lang="en">The backend handles patients, medical records, X-ray images and model output, <strong>split into API, service and repository layers</strong>.</li>
@@ -1045,7 +1051,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
             <li data-lang="ko">SQLAlchemy 비동기 세션과 Alembic 마이그레이션으로 스키마를 관리하고 테스트는 실제 MySQL을 건드리지 않도록 <strong>격리된 SQLite에서 pytest</strong>로 돌립니다.</li><li data-lang="en">Sessions are async SQLAlchemy with Alembic migrations, and <strong>pytest runs against an isolated SQLite database</strong> so tests never touch the real MySQL.</li>
           </ul>
 
-          <h4 data-lang="ko">구조</h4><h4 data-lang="en">Architecture</h4>
+          <h4 data-lang="ko">서비스 구성도와 기여 내역</h4><h4 data-lang="en">Architecture diagram and my contribution</h4>
           <p data-lang="ko" class="fig-hint">그림을 누르면 원본 크기로 열립니다</p><p data-lang="en" class="fig-hint">Select an image to open it full size</p>
           <div class="figs">
             <figure class="fig">
@@ -1086,7 +1092,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
              data-title-en="Health Insights from Smoking-Status Data"
              data-sub="오즈코딩스쿨 AI 헬스케어 과정 · 4조 (4인 팀) · 2026.04"
              data-sub-en="Oz Coding School AI Healthcare · group 4 (team of four) · Apr 2026">
-          <h4 data-lang="ko">개요</h4><h4 data-lang="en">Overview</h4>
+          <h4 data-lang="ko">건강검진 데이터로 흡연과 지표의 관계 검정</h4><h4 data-lang="en">Testing smoking against health indicators</h4>
           <ul>
             <li data-lang="ko">건강검진 데이터로 흡연 여부와 건강 지표의 관계를 분석하고 시각화했습니다.</li><li data-lang="en">We analysed and visualised the relationship between smoking status and clinical indicators in health-screening data.</li>
             <li data-lang="ko">혈압 · 혈당 · 콜레스테롤 · BMI 등의 분포와 상관관계를 확인하고, 흡연자와 비흡연자의 차이를 <strong>통계적 가설 검정</strong>으로 검증했습니다.</li><li data-lang="en">We checked distributions and correlations across blood pressure, glucose, cholesterol and BMI, and tested the difference between smokers and non-smokers with <strong>statistical hypothesis testing</strong>.</li>
@@ -1098,14 +1104,14 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
             <li data-lang="ko">분석 코드 작성과 발표 자료 구성을 담당했고 팀 발표에도 참여했습니다.</li><li data-lang="en">I wrote the analysis code, built the deck and presented with the team.</li>
           </ul>
 
-          <h4 data-lang="ko">발견</h4><h4 data-lang="en">Findings</h4>
+          <h4 data-lang="ko">헤모글로빈 0.40 — 가장 높은 상관</h4><h4 data-lang="en">Haemoglobin at 0.40 — the strongest correlation</h4>
           <ul>
             <li data-lang="ko">흡연 여부와 상관이 가장 높은 지표는 <strong>헤모글로빈(상관계수 <em>0.40</em>)</strong>이었고 키 <em>0.39</em>, 몸무게 <em>0.31</em>, 중성지방 <em>0.25</em>가 뒤를 이었습니다.</li><li data-lang="en">The highest correlation with smoking status was <strong>haemoglobin (r = <em>0.40</em>)</strong>, followed by height <em>0.39</em>, weight <em>0.31</em> and triglycerides <em>0.25</em>.</li>
             <li data-lang="ko"><strong>고밀도지단백(HDL)은 <em>-0.18</em></strong>로 음의 상관이었습니다. 흡연 집단에서 HDL 수치가 낮게 나타났습니다.</li><li data-lang="en"><strong>HDL was negative at <em>−0.18</em></strong>, with lower values in the smoking group.</li>
             <li data-lang="ko">나이대와 BMI 구간을 나눠 보면 같은 지표라도 40대와 50대에서 차이 폭이 달랐습니다.</li><li data-lang="en">Split by age band and BMI bracket, the same indicators separated by different margins in the 40s and the 50s.</li>
           </ul>
 
-          <h4 data-lang="ko">결과</h4><h4 data-lang="en">Results</h4>
+          <h4 data-lang="ko">지표 분포와 상관관계</h4><h4 data-lang="en">Indicator distributions and correlations</h4>
           <p data-lang="ko" class="fig-hint">그림을 누르면 원본 크기로 열립니다</p><p data-lang="en" class="fig-hint">Select an image to open it full size</p>
           <div class="figs">
             <figure class="fig">
@@ -1153,7 +1159,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
              data-title-en="Customer Booking Behaviour Model"
              data-sub="British Airways Data Science Simulation · Forage · 2024.04"
              data-sub-en="British Airways Data Science Simulation · Forage · Apr 2024">
-          <h4 data-lang="ko">내용</h4><h4 data-lang="en">Summary</h4>
+          <h4 data-lang="ko">예약 5만 건으로 RandomForest 분류</h4><h4 data-lang="en">RandomForest on 50,000 bookings</h4>
           <ul>
             <li data-lang="ko">5만 건 규모의 고객 예약 데이터를 불러와 요일 같은 범주형 변수를 수치로 매핑하고 결측과 분포를 확인해 모델링용 데이터셋을 만들었습니다.</li><li data-lang="en">I loaded the customer booking dataset, mapped categorical fields such as day-of-week to numbers, and checked missingness and distributions to build a modelling table.</li>
             <li data-lang="ko">구매 시점까지의 리드타임 · 탑승 인원 · 출발 시각 · 비행 시간을 피처로 <strong>RandomForest 분류 모델</strong>을 학습하고 confusion matrix와 classification report로 평가했습니다.</li><li data-lang="en">I trained a <strong>RandomForest classifier</strong> on purchase lead time, passenger count, departure hour and flight duration, evaluating with a confusion matrix and classification report.</li>
@@ -1186,7 +1192,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
              data-title-en="Customer Review Data Analysis"
              data-sub="British Airways Data Science Simulation · Forage · 2024.04"
              data-sub-en="British Airways Data Science Simulation · Forage · Apr 2024">
-          <h4 data-lang="ko">내용</h4><h4 data-lang="en">Summary</h4>
+          <h4 data-lang="ko">리뷰 스크래핑과 VADER 감성 — 부정 56.4%</h4><h4 data-lang="en">Scraped reviews, VADER sentiment — 56.4% negative</h4>
           <ul>
             <li data-lang="ko">Python 웹 스크래핑으로 <strong>비정형 리뷰 데이터</strong>를 수집하고 분석 가능한 형태로 정제했습니다.</li><li data-lang="en">I collected <strong>unstructured review text</strong> by web scraping in Python and cleaned it into an analysable form.</li>
             <li data-lang="ko">airlinequality.com에서 리뷰 10페이지를 BeautifulSoup으로 수집하고 「Trip Verified」 같은 머리말을 제거했습니다.</li><li data-lang="en">I collected ten pages of reviews from airlinequality.com with BeautifulSoup and removed boilerplate prefixes such as “Trip Verified”.</li>
@@ -1194,7 +1200,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
             <li data-lang="ko">워드클라우드에서는 <strong>seat · time · service · food · staff</strong>가 가장 자주 등장했습니다. 불만이 <strong>좌석과 대기 시간, 응대</strong>에 집중돼 있었습니다.</li><li data-lang="en">The word cloud showed <strong>seat, time, service, food</strong> and <strong>staff</strong> appearing most often, with complaints concentrated on <strong>seating, waiting times and staff response</strong>.</li>
           </ul>
 
-          <h4 data-lang="ko">결과</h4><h4 data-lang="en">Results</h4>
+          <h4 data-lang="ko">감성 분포와 반복 단어</h4><h4 data-lang="en">Sentiment distribution and frequent words</h4>
           <p data-lang="ko" class="fig-hint">그림을 누르면 원본 크기로 열립니다</p><p data-lang="en" class="fig-hint">Select an image to open it full size</p>
           <div class="figs">
             <figure class="fig">
@@ -1260,7 +1266,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
             <li data-lang="ko">점수만으로는 원인을 알 수 없어 <strong>PyMOL로 결합 부위를 확인했습니다.</strong> 약물이 어느 아미노산과 접촉하는지와 그 거리를 하나씩 기록하고 그림으로 남겼습니다.</li><li data-lang="en">Scores alone do not explain the cause, so I <strong>inspected the binding sites in PyMOL</strong>, recording which amino acids each drug contacts and at what distance, and saving the views as figures.</li>
           </ul>
 
-          <h4 data-lang="ko">결과</h4><h4 data-lang="en">Findings</h4>
+          <h4 data-lang="ko">이소프레날린은 β1에서 최고, 선택성은 구분 불가</h4><h4 data-lang="en">Isoprenaline highest at β1; selectivity indistinguishable</h4>
           <ul>
             <li data-lang="ko"><strong>이소프레날린</strong>은 β1에서 점수가 가장 높았습니다. 실제로 심장의 β 수용체에 작용하는 약물이라 <strong>계산 결과가 알려진 성질과 일치했습니다.</strong></li><li data-lang="en"><strong>Isoprenaline</strong> scored highest on β1. It does act on β receptors in the heart, so <strong>the computed result matched the known behaviour.</strong></li>
             <li data-lang="ko"><strong>아세틸콜린</strong>은 네 수용체 모두에서 가장 낮았습니다. 이 계열에 작용하지 않는 물질이라 <strong>음성 대조군</strong> 역할을 했습니다.</li><li data-lang="en"><strong>Acetylcholine</strong> scored lowest on all four. It does not act on this family, so it served as a <strong>negative control</strong>.</li>
@@ -1318,7 +1324,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
             <li data-lang="ko">시뮬레이션을 정답 아는 경우로 먼저 검증한 것과 X-ray 프로젝트에서 Grad-CAM으로 판단 근거를 확인한 것은 같은 종류의 작업입니다.</li><li data-lang="en">Validating the simulation against a known answer and using Grad-CAM to check the X-ray model's reasoning are the same kind of step.</li>
           </ul>
 
-          <h4 data-lang="ko">결과</h4><h4 data-lang="en">Results</h4>
+          <h4 data-lang="ko">수용체별 결합 점수와 채점 방식 비교</h4><h4 data-lang="en">Binding scores by receptor and by scoring function</h4>
           <p data-lang="ko" class="fig-hint">그림을 누르면 원본 크기로 열립니다</p><p data-lang="en" class="fig-hint">Select an image to open it full size</p>
           <div class="figs">
             <figure class="fig">
@@ -1382,7 +1388,7 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
              data-title-en="Clinical Trial Data Analysis — Miraculon-B"
              data-sub="STEP UP GSK Virtual Work Experience · Digdata · 2023.06"
              data-sub-en="STEP UP GSK Virtual Work Experience · Digdata · Jun 2023">
-          <h4 data-lang="ko">내용</h4><h4 data-lang="en">Summary</h4>
+          <h4 data-lang="ko">Miraculon-B 임상시험 데이터 분석과 제언</h4><h4 data-lang="en">Miraculon-B trial data — analysis and recommendation</h4>
           <ul>
             <li data-lang="ko">신약 후보물질 <strong>Miraculon-B</strong>의 임상시험 데이터를 분석하고 시각화했습니다.</li><li data-lang="en">I analysed and visualised trial data for the candidate compound <strong>Miraculon-B</strong>.</li>
             <li data-lang="ko">분석 결과와 제언을 발표자료로 정리해 GSK · Digdata 심사진에 제출했습니다.</li><li data-lang="en">I compiled the findings and recommendations into a presentation and submitted it to the GSK and Digdata panel.</li>
@@ -1612,6 +1618,8 @@ html[lang="en"] .skill :is(li:not([data-lang]), li[data-lang="en"]) ~ :is(li:not
       </div>
     </div>
   </section>
+
+  </main>
 
   <footer class="colophon">
     <span data-lang="ko">권민재 · Minjae Kwon</span><span data-lang="en">Minjae Kwon · 권민재</span>

@@ -48,9 +48,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚗️</text></svg>">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;900&family=IBM+Plex+Mono:wght@400&display=swap">
 
 <style>
 /* ═══════════════════════════════════════════════════════════
@@ -65,6 +66,7 @@
   --rule:    #E4DCCE;
   --accent:  #3E6B4F;
   --accent-soft: #E9EFE8;
+  --paper-hi: #FFFDF8;   /* 행 호버 지면 */
 
   --serif: "Noto Serif KR", "Apple SD Gothic Neo", serif;
   --sans:  "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
@@ -91,6 +93,8 @@ a { color: inherit; }
 :where(a, button):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 .skip { position: absolute; left: -9999px; background: var(--accent); color: #fff; padding: .6rem 1rem; z-index: 99; }
 .skip:focus { left: 1rem; top: 1rem; }
+
+main:focus { outline: none; }
 
 html[lang="ko"] [data-lang="en"] { display: none !important; }
 html[lang="en"] [data-lang="ko"] { display: none !important; }
@@ -199,7 +203,7 @@ h2.title {
   padding: 1.55rem .2rem; text-decoration: none;
   transition: background .18s;
 }
-.works a:hover { background: #fffdf8; }
+.works a:hover { background: var(--paper-hi); }
 .works .w-body { min-width: 0; }
 .works .w-title {
   font-family: var(--serif); font-weight: 600; font-size: 1.28rem;
@@ -265,7 +269,7 @@ h2.title {
 ::selection { background: var(--accent-soft); color: var(--ink); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
 @media (max-width: 40rem) {
@@ -277,7 +281,7 @@ h2.title {
 </head>
 <body>
 
-<a data-lang="ko" class="skip" href="#work">본문으로 건너뛰기</a><a data-lang="en" class="skip" href="#work">Skip to content</a>
+<a data-lang="ko" class="skip" href="#main">본문으로 건너뛰기</a><a data-lang="en" class="skip" href="#main">Skip to content</a>
 
 <div class="wrap">
 
@@ -293,6 +297,8 @@ h2.title {
       <button type="button" data-lang-set="en" aria-pressed="false">EN</button>
     </div>
   </header>
+
+  <main id="main" tabindex="-1">
 
   <section class="hero">
     <span data-lang="ko" class="status">서울 · 2026 하반기 지원 중</span>
@@ -455,6 +461,8 @@ h2.title {
       data/ML and bio roles. Coffee chats and hiring conversations are both welcome.</p>
     <p class="contact-big"><a href="mailto:kkmj1150@gmail.com">kkmj1150@gmail.com</a></p>
   </section>
+
+  </main>
 
   <nav class="footnav" aria-label="바로가기">
     <a href="ai.html">Portfolio · AI</a>

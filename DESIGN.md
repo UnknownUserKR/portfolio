@@ -4,7 +4,8 @@
 UI 작업을 할 때 **먼저 읽고 따라야 하는 기준**이다. 새 색·새 폰트·새 간격을 발명하지 말고
 아래 토큰을 쓴다.
 
-- 최종 갱신 2026-08-26 (안티슬로프 리디자인 — 벤치마킹 근거는 `../docs/2026-08-26-포트폴리오-리디자인-벤치마킹.md`)
+- 최종 갱신 2026-08-29 (근거 기반 성능·접근성·헤딩 패스 — `../docs/2026-08-29-포트폴리오-근거조사-적용.md`)
+- 직전 갱신 2026-08-26 (안티슬로프 리디자인 — `../docs/2026-08-26-포트폴리오-리디자인-벤치마킹.md`)
 - 대상 `index.html` · `ai.html` · `bio.html` (빌드 도구 없는 순수 정적 HTML, 각 파일에 `<style>` 인라인)
 - 배포 GitHub Pages — https://unknownuserkr.github.io/
 
@@ -38,6 +39,7 @@ UI 작업을 할 때 **먼저 읽고 따라야 하는 기준**이다. 새 색·�
 --rule:    #E4DCCE;   /* 장식 괘선 (텍스트 아님) */
 --accent:  #3E6B4F;   /* 강조·링크    5.64:1 */
 --accent-soft: #E9EFE8;
+--paper-hi: #FFFDF8;  /* 행 호버 지면 (텍스트 아님) */
 
 --serif: "Noto Serif KR", "Apple SD Gothic Neo", serif;
 --sans:  "Pretendard Variable", Pretendard, -apple-system, …;
@@ -58,7 +60,7 @@ UI 작업을 할 때 **먼저 읽고 따라야 하는 기준**이다. 새 색·�
 --ink-3:    #5a6e79;  /* 캡션·라벨    4.52:1 */
 --rule:     #d2dbde;  --rule-2: #b5c3c8;
 --trace:    #0c7687;  /* 강조         4.50:1 */
---trace-soft:#dceff3;
+--trace-soft:#e3f3f7;  /* trace 얹었을 때 4.66:1 — 구 #dceff3은 4.47로 AA 미달이었다 */
 --critical: #c2372f;  --warn: #8f6305;   /* 4.59 · 4.50 */
 
 --t-xs:.6875rem  --t-sm:.8125rem  --t-base:.9375rem
@@ -108,7 +110,14 @@ ai·bio는 **"계측 기술 문서"**(데이터시트·실험 보고서). 아래
 - `--rule` 계열은 **장식 괘선 전용**. 텍스트나 의미 있는 UI 경계에 쓰지 않는다.
 - 모든 초점 이동에 `:focus-visible` 링을 보인다. 링 등장에 애니메이션을 걸지 않는다.
 - `prefers-reduced-motion: reduce`에서 모든 등장 모션을 끈다 (이미 구현됨).
-- 각 페이지 첫 요소는 본문 건너뛰기 링크(`.skip`).
+- 각 페이지 첫 요소는 본문 건너뛰기 링크(`.skip`)이고, **목적지는 `#main`**이다.
+  세 페이지 모두 `<main id="main" tabindex="-1">`가 있다 (index는 `</header>`~`.footnav` 사이,
+  ai·bio는 `</header>`~`.colophon` 사이). `main:focus { outline: none }`는 이 패턴의 짝이니 함께 유지한다.
+  2026-08-29 이전에는 `<main>`이 아예 없었고 skip이 `#work`를 가리켜 About을 통째로 건너뛰었다.
+- **틴트 배경 위의 텍스트도 4.5:1을 지킨다.** `--trace-soft`를 배경으로 쓰는 곳(`.langswitch button[aria-pressed="true"]`,
+  `.linkbtn`)은 전경이 `--trace`다. 이 조합을 바꿀 때마다 대비를 다시 계산한다.
+- 터치 타깃은 WCAG 2.2 SC 2.5.8(AA, 24×24 CSS px)을 **간격 예외로** 통과한다 — topnav·verlink·연락 링크는
+  24px보다 작지만 24px 지름 원이 서로 겹치지 않는다. 이 간격(topnav `gap:1.4rem`, `.switches gap:.5rem`)을 줄이면 예외가 깨진다.
 
 ## 한국어 타이포그래피
 
@@ -134,6 +143,19 @@ ai·bio는 **"계측 기술 문서"**(데이터시트·실험 보고서). 아래
 `html, body { overflow-x: clip }`는 안전망이지 해결책이 아니다. **넘치는 원인을 먼저 없앤다** —
 clip은 증상을 가리므로 `scrollWidth` 측정만으로는 버그를 놓친다. 요소별 `getBoundingClientRect().right`로 확인할 것.
 
+## 성능 — 폰트 요청은 실제 쓰는 굵기만
+
+index의 LCP 요소는 히어로 세리프 표제(`h1.head`)라서 **웹폰트 CSS가 곧 임계 경로**다.
+Google Fonts CSS는 굵기 하나당 한국어 서브셋 수십 개가 붙어 굵기 수에 비례해 커진다.
+
+- `Noto Serif KR`은 **600·900만** 요청한다. 400은 어디에서도 쓰지 않는다
+  (세리프 사용처는 `.wordmark` 600 · `h1.head` 900 · `h2.title` 900 · `.works .w-title` 600 · `.door .d-name` 900 · `.contact-big` 600뿐).
+- `IBM Plex Mono`는 index에서 **400만**, ai·bio에서 **400·600만** 요청한다.
+- `fonts.googleapis.com`에도 `preconnect`를 건다 — 차단 리소스가 그 origin에서 온다.
+
+2026-08-29 측정: index의 Google Fonts CSS가 gzip **70.1 KB → 46.8 KB**(원본 290 KB → 193 KB).
+굵기를 다시 늘리려면 그 굵기를 실제로 쓰는 규칙을 먼저 만들고, 이 숫자를 다시 잰다.
+
 ## 모션
 
 - 상태 전환 `.18s`~`.2s`. 유일한 등장 모션은 index의 곡선 드로잉(1.6s, 최초 노출 1회)뿐이다.
@@ -148,6 +170,12 @@ clip은 증상을 가리므로 `scrollWidth` 측정만으로는 버그를 놓친
 - 수치는 **실측값만.** 없는 지표를 만들지 않는다. 확인 안 된 값은 비워두거나 다른 구성으로 바꾼다.
 - 한국어·영어 병기는 `data-lang` 속성 + `html[lang]` 토글. 한쪽만 고치지 않는다.
 - 링크·버튼 문구는 결과를 그대로 말한다.
+- **헤딩은 정보를 앞에 싣는다.** 훑는 사람이 앞 두 단어만 볼 수 있다는 전제로 쓴다
+  (NN/g, 2026-08-19 재검토: "Start headings and subheadings with the words carrying most information").
+  `내용` · `개요` · `구조` 같은 무정보 라벨과, **한 모달 안에서 `결과`가 두 번 나오는 구성**은 금지다.
+  다만 `배경 · 방법 · 실험 · 검증 · 한계`는 실험 보고서의 정규 구조라 **의도적으로 남겨 둔다** —
+  이 사이트의 컨셉이 '계측 기술 문서'이기 때문이다. 도판 위 헤딩은 그림이 무엇인지 말한다
+  (예: `결과` → `데이터 · 학습 곡선 · Grad-CAM`).
 
 ---
 
@@ -188,3 +216,8 @@ clip은 증상을 가리므로 `scrollWidth` 측정만으로는 버그를 놓친
    이력서는 `scripts/make_resumes.py`로 생성하며 docx를 직접 고치지 않는다.
 3. `portfolio.html` 류의 사본을 만들지 않는다. 원본은 `site/`의 3개 파일뿐이다.
 4. 새 토큰을 넣으면 이 문서에 기록한다. 기록되지 않은 값은 다음 에이전트가 지운다.
+5. `ai.html`과 `bio.html`의 `<style>` 블록은 **바이트 단위로 동일**하다(2026-08-29 확인).
+   한쪽만 고치면 안 되고, 고친 뒤에는 두 블록이 같은지 다시 확인한다.
+6. 반응형 검증은 헤드리스 크롬의 `--window-size`로 하지 않는다 — 뷰포트가 **500px 아래로 내려가지 않아**
+   320/375/390 스크린샷이 전부 500px 레이아웃을 잘라낸 그림이 된다(실제로 없는 오버플로처럼 보인다).
+   너비 지정 iframe 안에 페이지를 띄우고 그 안에서 `getBoundingClientRect()`로 잰다.
