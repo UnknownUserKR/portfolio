@@ -7,7 +7,7 @@ UI 작업을 할 때 **먼저 읽고 따라야 하는 기준**이다. 새 색·�
 - 최종 갱신 2026-08-29 (근거 기반 성능·접근성·헤딩 패스 — `../docs/2026-08-29-포트폴리오-근거조사-적용.md`)
 - 직전 갱신 2026-08-26 (안티슬로프 리디자인 — `../docs/2026-08-26-포트폴리오-리디자인-벤치마킹.md`)
 - 대상 `index.html` · `ai.html` · `bio.html` (빌드 도구 없는 순수 정적 HTML, 각 파일에 `<style>` 인라인)
-- 배포 GitHub Pages — https://unknownuserkr.github.io/
+- 배포 GitHub Pages — https://unknownuserkr.github.io/portfolio/ (저장소 `UnknownUserKR/portfolio`, 2026-10-01 `UnknownUserKR.github.io`에서 이름 변경)
 
 ---
 
